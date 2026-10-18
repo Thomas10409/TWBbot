@@ -1,6 +1,6 @@
 # TWBbot
 
-以 Python 與 Pycord 開發的開源 Discord 機器人，基於原有的 `twmc bot` 專案延續開發。
+以 Python 與 Pycord 開發的開源 Discord 機器人。
 
 提供一般實用指令、文字編碼與雜湊計算，以及 YouTube 音樂播放等功能，並採用模組化架構管理機器人指令。
 
