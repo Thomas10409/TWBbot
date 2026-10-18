@@ -10,6 +10,8 @@ command_list = {}
 load = []
 unload = []
 
+author_name = ""
+
 def isYouTubeURL(youtube_url):
     youtube_regex = r"^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))(?P<YouTubeID>(\w|-){11})(?:\S+)?$"
     sreMatch = re.match(youtube_regex, youtube_url)
@@ -24,6 +26,10 @@ async def on_ready():
         status_w = state["state"]
         activity_w = discord.Activity(type=discord.ActivityType.watching, name=state["state_text"])
         await bot.change_presence(status= status_w, activity=activity_w)
+    with open("./config/author.json",encoding="utf-8") as f:
+        data = f.read()
+        data = json.loads(state)
+        author_name = state["bot_author"]
 
 @bot.slash_command(name="help",description="給你看看指令的用法")
 async def help(ctx):
@@ -36,8 +42,8 @@ async def help(ctx):
         while(i != len(command_info)+1):
             embed.add_field(name=f"{command_info[str(i)][0]}",value=f"{command_info[str(i)][1]}", inline=command_info[str(i)][2])
             i += 1
-    embed.add_field(name="有問題可以私訊我\n或加入我ㄉㄜDC群", value="https://discord.gg/64QKSAmS4T", inline=False)
-    embed.set_footer(text="作者:Thomas10409#3431")
+    embed.add_field(name="有問題可以私訊我\n或加入我ㄉㄜDC群", value="[link]", inline=False)
+    embed.set_footer(text=f"作者:{bot_author}")
     await ctx.respond(embed=embed)
 
 print("Command Cogs:")
